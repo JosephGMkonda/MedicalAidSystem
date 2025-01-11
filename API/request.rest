@@ -1,0 +1,18 @@
+# create users 
+# POST http://localhost:5000/api/user
+
+# Content-Type: application/json
+
+{
+    "name":"josephmkonda",
+    "email": "josephmkonda@gmail.com",
+    "password": "admin",
+    "confirmPassword": "admin",
+    "role":"admin"
+}
+
+# get all users
+# GET http://localhost:5000/api/users
+
+
+GET http://localhost:5000/api/users/uuid

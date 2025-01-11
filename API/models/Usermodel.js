@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import { db } from "../config/database.js";
 
 
+
 const {DataTypes} = Sequelize;
 
 const Users = db.define('Users',{
@@ -38,14 +39,7 @@ const Users = db.define('Users',{
             notEmpty: true
         }
     },
-    name:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-            len: [3, 100]
-        }
-    },
+    
     role:{
         type: DataTypes.STRING,
         allowNull: false,
