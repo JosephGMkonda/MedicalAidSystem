@@ -3,15 +3,17 @@ import { getInventory,
     getInventoryById,
     updateInventory,
     deleteInventory,
-    createInventory } from '../controllers/InventoryController';
-
-const router = express.Router();
-
-router.get('/inventory', getInventory);
-router.get('/inventory:id', getInventoryById);
-router.delete('/inventory:id', deleteInventory);
-router.patch('/inventory', updateInventory);
-router.post('/create', createInventory);
+    createInventory } from '../controllers/InventoryController.js';
+import { verifyUser, AdminOnly } from '../middleware/AunthUser.js';
 
 
-export default router;
+const inventoryRouter = express.Router();
+
+inventoryRouter.get('/inventory',verifyUser, getInventory);
+inventoryRouter.get('/inventory/:id',verifyUser, getInventoryById);
+inventoryRouter.delete('/inventory/:id',verifyUser, deleteInventory);
+inventoryRouter.patch('/inventory/:id',verifyUser, updateInventory);
+inventoryRouter.post('/create',verifyUser, createInventory);
+
+
+export default inventoryRouter;
