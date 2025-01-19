@@ -26,7 +26,7 @@ const Sidebar = () => {
 
       
       <Link
-        to="/dashboard"
+        to="/"
         className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
       >
         <BsGrid3X3GapFill className="text-sm transition-transform duration-300 group-hover:scale-125" />
@@ -34,7 +34,7 @@ const Sidebar = () => {
       </Link>
 
       <Link
-        to="/patients"
+        to="/users"
         className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
       >
         <BsPeopleFill className="text-sm transition-transform duration-300 group-hover:scale-125" />
