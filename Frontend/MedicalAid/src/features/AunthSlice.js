@@ -27,6 +27,12 @@ export const LoginUser = createAsyncThunk ("user/LoginUser", async(user, thunkAP
     }
 })
 
+
+export const LogOutUser = createAsyncThunk ("user/LogOutUser", async() => {
+
+         await axios.delete("http://localhost:5000/api/logout");
+})
+
 export const authSlice = createSlice({
     name:"auth",
     initialState,
