@@ -1,9 +1,33 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { BsBoxFill,BsClipboard2Check, BsFillPencilFill, BsFillTrashFill,  BsChevronDoubleRight, BsChevronDoubleLeft} from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
+import { fetchUser, deleteUser } from '../features/UserSlice';
+import EditUser from '../components/editUser';
+
+
 
 const Users = () => {
+
+  const dispatch = useDispatch()
+  const {users, isLoading, isError, message} =  useSelector((state) => state.users)
+  const [editUser, setEditUser] = useState(null)
+
+
+  useEffect(() => {
+    dispatch(fetchUser())
+  },[dispatch])
+
+  const handleDelete = (id) => {
+    dispatch(deleteUser())
+
+  };
+
+  const handleEdit = (user) => {
+    setEditUser(user)
+  }
+
   return (
 
     <div className="container p-6 mt-12  overflow-auto">
@@ -42,23 +66,36 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            
+            {users.map((user) => (
                 <tr className="border-b">
-                  <td className="py-2 px-4">kkkl</td>
-                  <td className="py-2 px-4">ooo</td>
-                  <td className="py-2 px-4">uuu</td>
+                  <td className="py-2 px-4">{user.name}</td>
+                  <td className="py-2 px-4">{user.email}</td>
+                  <td className="py-2 px-4">{user.role}</td>
                   
                   <td className="py-2 px-4">
                 
-                  <button className="px-2 text-blue-500"><BsFillPencilFill/></button>
-                  <button className="px-2 text-red-500"><BsFillTrashFill/></button>
+                  <button 
+                   onClick={() => handleEdit(user)}
+                  className="px-2 text-blue-500"><BsFillPencilFill/></button>
+                  <button 
+                  onClick={() => handleDelete(user.id)}
+                  className="px-2 text-red-500"><BsFillTrashFill/></button>
                   </td>
                 </tr>
-        
+              ))}
         
           </tbody>
         </table>
       </div>
+
+      {
+        editUser && (
+          <EditUser
+          user={editUser}
+          onClose={() => setEditUser(null)}
+          />
+        )
+      }
     
 
     

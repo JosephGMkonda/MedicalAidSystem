@@ -27,6 +27,20 @@ export const LoginUser = createAsyncThunk ("user/LoginUser", async(user, thunkAP
     }
 })
 
+export const getMe = createAsyncThunk ("user/getMe", async(user, thunkAPI) => {
+    try {
+        const response = await axios.post("http://localhost:5000/api/me");
+        return response.data;
+    } catch (error) {
+        if(error.response && error.response.data ){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+        return thunkAPI.rejectWithValue(error.message)
+        
+    }
+})
+
 
 export const LogOutUser = createAsyncThunk ("user/LogOutUser", async() => {
 
@@ -55,7 +69,29 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
-        })
+        });
+        
+
+
+        
+        // getMe cases
+
+        builder.addCase(getMe.pending, (state) => {
+            state.isLoading = true
+        });
+
+        builder.addCase(getMe.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.user = action.payload;
+
+        });
+
+        builder.addCase(getMe.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        });
 
 
 

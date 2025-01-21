@@ -1,7 +1,7 @@
 import { BsFillBellFill } from "react-icons/bs";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LogOutUser,reset} from "../features/AunthSlice";
+import { LogOutUser,reset,getMe} from "../features/AunthSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,8 +10,13 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {user} = useSelector((state) => state.auth); 
+    
 
+    useEffect(() => {
+        dispatch(getMe());
 
+    },[dispatch])
+    
 
     const handleLogout = () => {
         dispatch(LogOutUser());
@@ -37,7 +42,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center px-[20px] relative">
-                    <p>Jo</p>
+                    <p className="px-[20px]">{user.name}| {user.role}</p>
                     <div onClick={() => setShowDropdown(!showDropdown)}>
                         <img 
                             src="personImg.jpeg" 

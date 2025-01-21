@@ -6,8 +6,37 @@ import {
   BsBoxFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+
+  const {user} = useSelector((state) => state.auth);
+
+  const linksByRole = {
+    admin: [
+      { to: "/", icon: <BsGrid3X3GapFill />, label: "Dashboard" },
+      { to: "/users", icon: <BsPeopleFill />, label: "Users" },
+      { to: "/inventory", icon: <BsBoxFill />, label: "Inventory" },
+      { to: "/orders", icon: <BsFillCartPlusFill />, label: "Orders" },
+      { to: "/settings", icon: <BsGear />, label: "Settings" },
+    ],
+
+    user: [
+      { to: "/", icon: <BsGrid3X3GapFill />, label: "Dashboard" },
+      { to: "/invetoryManager", icon: <BsFillCartPlusFill />, label: "My Orders" },
+    ],
+
+    client: [
+      { to: "/", icon: <BsGrid3X3GapFill />, label: "Products" },
+      { to: "/clientOrder", icon: <BsBoxFill />, label: "Available Inventory" },
+    ]
+  }
+
+  const userLinks = linksByRole[user?.role] || [];
+
+
+
+
   return (
     <div className="bg-[#fdfdfd] h-full w-[18%] fixed top-0 left-0 z-50">
       
@@ -24,46 +53,23 @@ const Sidebar = () => {
         </div>
       </div>
 
-      
-      <Link
-        to="/"
-        className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
-      >
-        <BsGrid3X3GapFill className="text-sm transition-transform duration-300 group-hover:scale-125" />
-        <span className="font-semibold"> Dashboard </span>
-      </Link>
+      {userLinks.map((link, index) => (
+        <Link
+          key={index}
+          to={link.to}
+          className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
+        >
+          {link.icon}
+          <span className="font-semibold">{link.label}</span>
+        </Link>
+      ))}
 
-      <Link
-        to="/users"
-        className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
-      >
-        <BsPeopleFill className="text-sm transition-transform duration-300 group-hover:scale-125" />
-        <span className="font-semibold"> Users </span>
-      </Link>
+     
 
-      <Link
-        to="/inventory"
-        className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
-      >
-        <BsBoxFill className="text-sm transition-transform duration-300 group-hover:scale-125" />
-        <span className="font-semibold"> Inventory </span>
-      </Link>
+     
 
-      <Link
-        to="/orders"
-        className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
-      >
-        <BsFillCartPlusFill className="text-sm transition-transform duration-300 group-hover:scale-125" />
-        <span className="font-semibold"> Orders </span>
-      </Link>
 
-      <Link
-        to="/settings"
-        className="group flex items-center gap-[15px] py-[20px] px-[20px] cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300"
-      >
-        <BsGear className="text-sm transition-transform duration-300 group-hover:scale-125" />
-        <span className="font-semibold"> Settings </span>
-      </Link>
+
     </div>
   );
 };
