@@ -39,23 +39,31 @@ export const addInventory = createAsyncThunk("inventory/addInventory", async(inv
 
 export const editInventory = createAsyncThunk("inventory/editInventory", async({id, inventoryData}, thunkAPI) => {
     try {
+      console.log("UUID:", id); 
+      console.log("Data Sent:", inventoryData); 
         const response = await axios.patch(`${API_URL}/${id}`, inventoryData);
+        console.log("Response Data:", response.data)
+        
         return response.data
     } catch (error) {
+       console.error("Error:", error.response?.data || error.message);
         return thunkAPI.rejectWithValue(error.response?.data?.msg || error.message);
         
     }
 })
 
 
-export const deleteInventory = createAsyncThunk("inventory/deleteInventory", async (id, thunkAPI) => {
-     try {
-        await axios.delete(`${API_URL}/${id}`);
-     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response?.data?.msg || error.message);
-        
-     }
-})
+export const deleteInventory = createAsyncThunk(
+  'inventory/deleteInventory',
+  async (uuid, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/inventory/${uuid}`);
+      return uuid; 
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
 
 export const inventorySlice = createSlice({
     name: "inventories",
@@ -107,8 +115,9 @@ export const inventorySlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.inventories = state.inventories.map((inventory) =>
-                inventories.id === action.payload.id ? action.payload : inventory
-            );
+              inventory.uuid === action.payload.uuid ? action.payload : inventory
+          );
+            
           });
         builder.addCase(editInventory.rejected, (state, action) => {
             state.isLoading = false;
