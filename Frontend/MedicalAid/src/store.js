@@ -7,6 +7,6 @@ export default configureStore({
   reducer: {
     auth: authReducer,
     users: userReducer,
-    inventory: inventoryReducer
+    inventories: inventoryReducer
   }
 })

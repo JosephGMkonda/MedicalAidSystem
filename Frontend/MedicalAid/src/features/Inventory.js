@@ -12,7 +12,7 @@ const initialState = {
 }
 
 
-const API_URL = "http://localhost:5000/api//inventory";
+const API_URL = "http://localhost:5000/api/inventory";
 
 export const fetchInventory = createAsyncThunk("inventory/fetchInventory", async(_, thunkAPI) => {
     try {

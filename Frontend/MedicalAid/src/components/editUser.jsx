@@ -26,7 +26,7 @@ const EditUser = ({ user, onClose }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-xl font-bold mb-4">Edit User</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name Input */}
+          
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
@@ -38,7 +38,7 @@ const EditUser = ({ user, onClose }) => {
             />
           </div>
 
-          {/* Email Input */}
+          
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -52,7 +52,7 @@ const EditUser = ({ user, onClose }) => {
 
           
 
-          {/* Role Dropdown */}
+          
           <div>
             <label className="block text-sm font-medium text-gray-700">Role</label>
             <select
@@ -67,7 +67,7 @@ const EditUser = ({ user, onClose }) => {
             </select>
           </div>
 
-          {/* Buttons */}
+          
           <div className="flex justify-end space-x-2">
             <button
               type="button"

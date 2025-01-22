@@ -114,17 +114,13 @@ export const getInventoryById = async (req, res) => {
 
 export const createInventory = async (req, res) => {
 
-    const {productName,quantity,batchNumber,expirationDate,unitPrice,description} = req.body;
+    const {productName, unitPrice} = req.body;
 
     try {
          await Inventory.create({
             productName:productName,
-            
-            quantity:quantity,
-            batchNumber:batchNumber,
-            expirationDate:expirationDate,
             unitPrice:unitPrice,
-            description:description,
+            
             userId: req.userId
         })
         res.status(201).json({msg: "created invetory"});
