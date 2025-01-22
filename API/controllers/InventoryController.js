@@ -29,7 +29,7 @@ export const getInventory = async (req, res) => {
         } else if (req.role === "user") {
             
             response = await Inventory.findAll({
-                attributes: ["uuid","productName", "unitPrice", "quantity"], 
+                attributes: ["uuid","productName", "totalValue","unitPrice", "quantity", "expirationDate","description","batchNumber"], 
                 include: [
                     {
                         model: User,
@@ -155,8 +155,8 @@ export const updateInventory = async (req, res) => {
             });
         } else if (req.role === "user") {
             
-            const { quantity, batchNumber } = req.body;
-            await Inventory.update({ quantity, batchNumber }, {
+            const { quantity, batchNumber,expirationDate } = req.body;
+            await Inventory.update({ quantity, batchNumber,expirationDate }, {
                 where: {
                     uuid: req.params.id,
                 },

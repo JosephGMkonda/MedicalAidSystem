@@ -23,7 +23,7 @@ const Sidebar = () => {
 
     user: [
       { to: "/", icon: <BsGrid3X3GapFill />, label: "Dashboard" },
-      { to: "/invetoryManager", icon: <BsFillCartPlusFill />, label: "My Orders" },
+      { to: "/invetoryManager", icon: <BsBoxFill />, label: "Inventory" },
     ],
 
     client: [

@@ -4,7 +4,7 @@ import Orders from './pages/Orders';
 import Inventory from './pages/Inventory';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
-import InvontoryManager from './pages/InventoryManager/InvontoryManager';
+import InventoryManager from './pages/InventoryManager/InvontoryManager';
 import InventoryDashboard from './pages/InventoryManager/InventoryDashboard';
 import editInventory from './pages/InventoryManager/editInventory';
 import ClientOrders from './pages/Client/ClientOrders';
@@ -46,7 +46,7 @@ const userRoutes = (
   <>
   <Route path="/" element={ <ProtectedRoute allowedRoles={['user']}> <Layout> <InventoryDashboard /></Layout> </ProtectedRoute>}/>
        
-  <Route path="/invetoryManager" element={ <ProtectedRoute allowedRoles={['user']}><Layout>  <InvontoryManager/>  </Layout>  </ProtectedRoute>} />
+  <Route path="/invetoryManager" element={ <ProtectedRoute allowedRoles={['user']}><Layout>  <InventoryManager/>  </Layout>  </ProtectedRoute>} />
   <Route path="/editinventory"  element={ <ProtectedRoute allowedRoles={['user']}> <Layout>  <editInventory/>  </Layout> </ProtectedRoute> }  />  
   
   </>
