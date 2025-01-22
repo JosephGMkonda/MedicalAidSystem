@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 const initialState = {
-    users: [],
+    inventories: [],
     isError: false,
     isLoading: false,
     isSuccess: false,
@@ -12,9 +12,9 @@ const initialState = {
 }
 
 
-const API_URL = "http://localhost:5000/api/users";
+const API_URL = "http://localhost:5000/api//inventory";
 
-export const fetchUser = createAsyncThunk("users/fetchUser", async(_, thunkAPI) => {
+export const fetchInventory = createAsyncThunk("inventory/fetchInventory", async(_, thunkAPI) => {
     try {
         const response = await axios.get(API_URL);
         console.log(response.data);
@@ -26,9 +26,9 @@ export const fetchUser = createAsyncThunk("users/fetchUser", async(_, thunkAPI) 
     }
 })
 
-export const addUser = createAsyncThunk("users/addUser", async(userData, thunkAPI) => {
+export const addInventory = createAsyncThunk("inventory/addInventory", async(inventoryData, thunkAPI) => {
     try {
-        const response = await axios.post(API_URL, userData);
+        const response = await axios.post(API_URL, inventoryData);
         return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response?.data?.msg || error.message);
@@ -37,9 +37,9 @@ export const addUser = createAsyncThunk("users/addUser", async(userData, thunkAP
     }
 })
 
-export const editUser = createAsyncThunk("users/editUser", async({id, userData}, thunkAPI) => {
+export const editInventory = createAsyncThunk("inventory/editInventory", async({id, inventoryData}, thunkAPI) => {
     try {
-        const response = await axios.patch(`${API_URL}/${id}`, userData);
+        const response = await axios.patch(`${API_URL}/${id}`, inventoryData);
         return response.data
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response?.data?.msg || error.message);
@@ -48,7 +48,7 @@ export const editUser = createAsyncThunk("users/editUser", async({id, userData},
 })
 
 
-export const deleteUser = createAsyncThunk("users/deleteUser", async (id, thunkAPI) => {
+export const deleteInventory = createAsyncThunk("inventory/deleteInventory", async (id, thunkAPI) => {
      try {
         await axios.delete(`${API_URL}/${id}`);
      } catch (error) {
@@ -57,8 +57,8 @@ export const deleteUser = createAsyncThunk("users/deleteUser", async (id, thunkA
      }
 })
 
-export const userSlice = createSlice({
-    name: "users",
+export const inventorySlice = createSlice({
+    name: "inventories",
     initialState,
     reducers: {
         resetSate: () => initialState,
@@ -66,68 +66,68 @@ export const userSlice = createSlice({
 
     extraReducers: (builder) => {
 
-        // fetch users
-        builder.addCase(fetchUser.pending, (state) => {
+        // fetch inventory
+        builder.addCase(fetchInventory.pending, (state) => {
             state.isLoading = true;
         })
 
-        builder.addCase(fetchUser.fulfilled, (state, action) => {
+        builder.addCase(fetchInventory.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.users = action.payload;
+            state.inventories = action.payload;
           });
 
-        builder.addCase(fetchUser.rejected, (state, action) => {
+        builder.addCase(fetchInventory.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
           });
 
-        //   add user
+        //   add inventory
 
-        builder.addCase(addUser.pending, (state) => {
+        builder.addCase(addInventory.pending, (state) => {
             state.isLoading = true;
           });
-        builder.addCase(addUser.fulfilled, (state, action) => {
+        builder.addCase(addInventory.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.users.push(action.payload);
+            state.inventories.push(action.payload);
           });
-        builder.addCase(addUser.rejected, (state, action) => {
+        builder.addCase(addInventory.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
           });
 
-        //   edit users 
-        builder.addCase(editUser.pending, (state) => {
+        //   edit inventory
+        builder.addCase(editInventory.pending, (state) => {
             state.isLoading = true;
           });
-        builder.addCase(editUser.fulfilled, (state, action) => {
+        builder.addCase(editInventory.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.users = state.users.map((user) =>
-              user.id === action.payload.id ? action.payload : user
+            state.inventories = state.inventories.map((inventory) =>
+                inventories.id === action.payload.id ? action.payload : inventory
             );
           });
-        builder.addCase(editUser.rejected, (state, action) => {
+        builder.addCase(editInventory.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
-            console.log("Redux State Users:", state.users);
+        
           });
 
         // delete users
 
-        builder.addCase(deleteUser.pending, (state) => {
+        builder.addCase(deleteInventory.pending, (state) => {
             state.isLoading = true;
           });
-          builder.addCase(deleteUser.fulfilled, (state, action) => {
+          builder.addCase(deleteInventory.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.users = state.users.filter((user) => user.id !== action.payload);
+            state.inventories = state.inventories.filter((inventory) => inventory.id !== action.payload);
           });
-          builder.addCase(deleteUser.rejected, (state, action) => {
+          builder.addCase(deleteInventory.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
@@ -139,5 +139,5 @@ export const userSlice = createSlice({
     }
 })
 
-export const { resetState } = userSlice.actions;
-export default userSlice.reducer;
+export const { resetState } = inventorySlice.actions;
+export default inventorySlice.reducer;

@@ -1,9 +1,20 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { BsBoxFill,BsClipboard2Check, BsFillPencilFill, BsFillTrashFill,  BsChevronDoubleRight, BsChevronDoubleLeft} from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
+import { fetchInventory } from '../features/inventory';
 
 const Inventory = () => {
+  const dispatch = useDispatch()
+  const {inventories, isLoading, isError, message} =  useSelector((state) => state.inventories)
+
+   
+  useEffect(() => {
+    dispatch(fetchInventory())
+  },[dispatch])
+
+
   return (
 
     <div className="container p-6 mt-12  overflow-auto">
@@ -35,28 +46,24 @@ const Inventory = () => {
           <thead>
             <tr className="bg-blue-100 text-black">
               <th className="py-2 px-4 text-left">Product Name</th>
-              <th className="py-2 px-4 text-left">Category</th>
               <th className="py-2 px-4 text-left">Quantity</th>
               <th className="py-2 px-4 text-left">Experation Date</th>
               <th className="py-2 px-4 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
-            
+              {inventories.map((Inventory) => {
                 <tr className="border-b">
-                  <td className="py-2 px-4">kkkl</td>
-                  <td className="py-2 px-4">ooo</td>
-                  <td className="py-2 px-4">
-                    uuu
-                  </td>
-                  <td className="py-2 px-4">,,</td>
+                  <td className="py-2 px-4">{Inventory.productName}</td>
+                  <td className="py-2 px-4">{Inventory.quantity}</td>
+            
                   <td className="py-2 px-4">
                   <button className="px-2 text-blue-500"><BsClipboard2Check/></button>
                   <button className="px-2 text-green-500"><BsFillPencilFill/></button>
                   <button className="px-2 text-red-500"><BsFillTrashFill/></button>
                   </td>
                 </tr>
-        
+               })}
         
           </tbody>
         </table>

@@ -20,10 +20,7 @@ const Inventory = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,

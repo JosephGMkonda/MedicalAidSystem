@@ -18,7 +18,7 @@ export const getInventory = async (req, res) => {
         } else if (req.role === "client") {
             
             response = await Inventory.findAll({
-                attributes: ["uuid","productName","category", "unitPrice","expirationDate"],
+                attributes: ["uuid","productName", "unitPrice","expirationDate"],
                 include: [
                     {
                         model: User,
@@ -29,7 +29,7 @@ export const getInventory = async (req, res) => {
         } else if (req.role === "user") {
             
             response = await Inventory.findAll({
-                attributes: ["uuid","productName","category", "unitPrice", "quantity"], 
+                attributes: ["uuid","productName", "unitPrice", "quantity"], 
                 include: [
                     {
                         model: User,
@@ -78,7 +78,7 @@ export const getInventoryById = async (req, res) => {
         } else if (req.role === "client") {
             
             response = await Inventory.findOne({
-                attributes: ["uuid", "productName", "category", "unitPrice", "expirationDate"],
+                attributes: ["uuid", "productName", "unitPrice", "expirationDate"],
                 where: {
                     uuid: req.params.id, 
                 },
@@ -92,7 +92,7 @@ export const getInventoryById = async (req, res) => {
         } else if (req.role === "user") {
             
             response = await Inventory.findOne({
-                attributes: ["uuid", "productName", "category", "unitPrice", "quantity"],
+                attributes: ["uuid", "productName",  "unitPrice", "quantity"],
                 where: {
                     uuid: req.params.id, 
                 },
@@ -114,12 +114,12 @@ export const getInventoryById = async (req, res) => {
 
 export const createInventory = async (req, res) => {
 
-    const {productName,category,quantity,batchNumber,expirationDate,unitPrice,description} = req.body;
+    const {productName,quantity,batchNumber,expirationDate,unitPrice,description} = req.body;
 
     try {
          await Inventory.create({
             productName:productName,
-            category:category,
+            
             quantity:quantity,
             batchNumber:batchNumber,
             expirationDate:expirationDate,

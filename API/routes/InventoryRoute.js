@@ -13,7 +13,7 @@ inventoryRouter.get('/inventory',verifyUser, getInventory);
 inventoryRouter.get('/inventory/:id',verifyUser, getInventoryById);
 inventoryRouter.delete('/inventory/:id',verifyUser, deleteInventory);
 inventoryRouter.patch('/inventory/:id',verifyUser, updateInventory);
-inventoryRouter.post('/create',verifyUser, createInventory);
+inventoryRouter.post('/inventory',verifyUser, createInventory);
 
 
 export default inventoryRouter;
