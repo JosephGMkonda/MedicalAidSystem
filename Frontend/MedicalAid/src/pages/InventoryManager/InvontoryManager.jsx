@@ -92,7 +92,7 @@ const InventoryManager = () => {
               <tr key={inventory.id} className="border-b">
                 <td className="py-2 px-4">{inventory.productName}</td>
                 <td className="py-2 px-4">{inventory.quantity}</td>
-                <td className="py-2 px-4">K {inventory.totalValue}</td>
+                <td className="py-2 px-4">K {inventory.totalValue?.toLocaleString()}</td>
                 <td className="py-2 px-4">{inventory.expirationDate}</td>
                 <td className="py-2 px-4">
                   <button 

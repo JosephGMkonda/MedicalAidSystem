@@ -1,20 +1,20 @@
 
 
 # create users 
-POST http://localhost:5000/api/users
+# POST http://localhost:5000/api/users
 
-Content-Type: application/json
+# Content-Type: application/json
 
-{
-    "name":"joseph",
-    "email": "admin@gmail.com",
-    "password": "admin123",
-    "confirmPassword": "admin123",
-    "role":"admin"
-}
+# {
+#     "name":"joseph",
+#     "email": "admin@gmail.com",
+#     "password": "admin123",
+#     "confirmPassword": "admin123",
+#     "role":"admin"
+# }
 
-# get all users
-# GET http://localhost:5000/api/users
+
+GET http://localhost:5000/api/adminStati
 
 
 # GET http://localhost:5000/api/users/uuid

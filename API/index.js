@@ -4,6 +4,7 @@ import session from "express-session";
 import userRouter from './routes/UserRoute.js';
 import AuthRouter from "./routes/AunthRoutes.js";
 import inventoryRouter from './routes/InventoryRoute.js';
+import AdminRouter from "./routes/AdminDashboard.js"
 import orderRouter from './routes/OrderRoute.js';
 import { db } from "./config/database.js";
 import SequelizeStore from 'connect-session-sequelize'; 
@@ -49,7 +50,8 @@ app.use(express.json());
 app.use('/api', userRouter);
 app.use('/api', AuthRouter);
 app.use('/api', inventoryRouter);
-app.use('/api', orderRouter);
+app.use('/api', orderRouter);  
+app.use('/api', AdminRouter);
 
 // Sync the session store
 // store.sync();
