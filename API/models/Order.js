@@ -6,9 +6,10 @@ const { DataTypes } = Sequelize;
 
 const Order = db.define('Order', {
     uuid: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
+        primaryKey: true, 
     },
     orderNumber: {
         type: DataTypes.STRING,
@@ -37,6 +38,6 @@ const Order = db.define('Order', {
 });
 
 Users.hasMany(Order);
-Order.belongsTo(Users, { foreignKey: "UserId" });  
+Order.belongsTo(Users, { foreignKey: "UserId" }); 
 
 export default Order;

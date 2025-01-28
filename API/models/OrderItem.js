@@ -6,48 +6,41 @@ import Inventory from "./Inventory.js";
 const { DataTypes } = Sequelize;
 
 const OrderItem = db.define("OrderItem", {
-    uuid: {
-        type: DataTypes.STRING,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
+  uuid: {
+    type: DataTypes.STRING,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true
+  },
   orderId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
     references: {
       model: Order,
-      key: "id",
+      key: "uuid",
     },
   },
   inventoryId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
     references: {
       model: Inventory,
-      key: "id",
+      key: "uuid",
     },
   },
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-      min: 1,
-    },
   },
-  priceAtOrder: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: false,
-  },
+}, {
+  timestamps: true,
 });
 
+// Relationships
 Order.hasMany(OrderItem, { foreignKey: "orderId" });
 OrderItem.belongsTo(Order, { foreignKey: "orderId" });
 
-Inventory.hasMany(OrderItem, { foreignKey: "inventoryId" });
-OrderItem.belongsTo(Inventory, { foreignKey: "inventoryId" });
+Inventory.hasMany(OrderItem, { foreignKey: "inventoryId", targetKey: "uuid" });
+OrderItem.belongsTo(Inventory, { foreignKey: "inventoryId", targetKey: "uuid" });
 
 export default OrderItem;

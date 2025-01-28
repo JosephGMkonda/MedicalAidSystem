@@ -11,16 +11,15 @@ const Inventory = db.define(
       type: DataTypes.STRING,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
+      primaryKey: true,
       validate: {
         notEmpty: true,
       },
     },
-
     productName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -57,8 +56,7 @@ const Inventory = db.define(
   }
 );
 
-
 Users.hasMany(Inventory);
-Inventory.belongsTo(Users, { foreignKey: "UsersId" });
+Inventory.belongsTo(Users, { foreignKey: "UserId" }); // Updated foreign key name
 
 export default Inventory;

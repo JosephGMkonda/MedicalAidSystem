@@ -12,6 +12,7 @@ import dotenv from "dotenv";
 import Inventory from "./models/Inventory.js";
 import Order from "./models/Order.js";
 import User from "./models/Usermodel.js";
+import OrderItem from "./models/OrderItem.js";
 
 dotenv.config();
 

@@ -93,6 +93,51 @@ export const getNearExpiryProducts = async (req, res) => {
 
 
 
+// Inventory Manager
+export const getInventorySummary = async (req, res) => {
+    try {
+        
+        const currentDate = new Date();
+
+        
+        const inventoryData = await Inventory.findAll({
+            attributes: ["quantity", "unitPrice", "expirationDate"],
+        });
+
+        
+        let totalValue = 0;
+        let totalQuantity = 0;
+        let expiredProductCount = 0;
+
+      
+        inventoryData.forEach((item) => {
+            const quantity = item.quantity;
+            const unitPrice = item.unitPrice;
+            const expirationDate = new Date(item.expirationDate);
+
+            
+            totalValue += quantity * unitPrice;
+
+            
+            totalQuantity += quantity;
+
+            
+            if (expirationDate < currentDate) {
+                expiredProductCount += quantity;
+            }
+        });
+
+        
+        res.status(200).json({
+            totalValue,
+            totalQuantity,
+            expiredProductCount,
+        });
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+};
+
   
   
   
