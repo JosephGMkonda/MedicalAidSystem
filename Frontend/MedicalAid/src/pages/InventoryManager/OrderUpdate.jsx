@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsSearch, BsChevronDoubleRight, BsChevronDoubleLeft,BsClipboard2Check } from "react-icons/bs";
 
-const Orders = () => {
+const OrderUpdate = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,7 +85,6 @@ const Orders = () => {
           <button onClick={() => handleViewOrder(order)} className="px-4 py-1 text-white rounded-[10px] shadow-md bg-gray-500">
           <BsClipboard2Check/>
           </button>
-          
         </td>
       </tr>
     ))
@@ -163,11 +162,8 @@ const Orders = () => {
 
             
             <div className="flex justify-between mt-4">
-              <button onClick={() => updateOrderStatus("Approved")} className="px-4 py-2 bg-green-500 text-white rounded-lg">
-              Approved
-              </button>
-              <button onClick={() => updateOrderStatus("Rejected")} className="px-4 py-2 bg-red-500 text-white rounded-lg">
-              Rejected
+              <button onClick={() => updateOrderStatus("Dispatch")} className="px-4 py-2 bg-green-500 text-white rounded-lg">
+                Dispatch
               </button>
               
             </div>
@@ -183,4 +179,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrderUpdate;

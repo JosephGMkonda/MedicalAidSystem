@@ -7,6 +7,7 @@ import Settings from './pages/Settings';
 import InventoryManager from './pages/InventoryManager/InvontoryManager';
 import InventoryDashboard from './pages/InventoryManager/InventoryDashboard';
 import editInventory from './pages/InventoryManager/editInventory';
+import OrderUpdate from './pages/InventoryManager/OrderUpdate';
 import ClientOrders from './pages/Client/ClientOrders';
 import Products from './pages/Client/Products';
 import SignIn from './pages/SignIn';
@@ -37,7 +38,7 @@ function App() {
     <>
       <Route path="/" element={ <ProtectedRoute allowedRoles={['client']}> <Layout> <Products /></Layout> </ProtectedRoute>}/>
        
-       <Route path="/clientOrder" element={ <ProtectedRoute allowedRoles={['client']}><Layout>  <ClientOrders />  </Layout>  </ProtectedRoute>} />
+       <Route path="/ClientOrder" element={ <ProtectedRoute allowedRoles={['client']}><Layout>  <ClientOrders />  </Layout>  </ProtectedRoute>} />
     
     </>
   )
@@ -48,8 +49,9 @@ const userRoutes = (
        
   <Route path="/invetoryManager" element={ <ProtectedRoute allowedRoles={['user']}><Layout>  <InventoryManager/>  </Layout>  </ProtectedRoute>} />
   <Route path="/editinventory"  element={ <ProtectedRoute allowedRoles={['user']}> <Layout>  <editInventory/>  </Layout> </ProtectedRoute> }  />  
+  <Route path="/orderupdate"  element={ <ProtectedRoute allowedRoles={['user']}> <Layout>  <OrderUpdate/>  </Layout> </ProtectedRoute> }  />
   
-  </>
+  </>   
 )
 
   return (

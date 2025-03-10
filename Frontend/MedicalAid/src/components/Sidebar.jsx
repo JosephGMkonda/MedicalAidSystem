@@ -23,12 +23,13 @@ const Sidebar = () => {
 
     user: [
       { to: "/", icon: <BsGrid3X3GapFill />, label: "Dashboard" },
-      { to: "/invetoryManager", icon: <BsBoxFill />, label: "Inventory" },
+      { to: "/invetoryManager", icon: <BsBoxFill />, label: "Inventory" }, 
+      { to: "/orderupdate", icon: <BsFillCartPlusFill />, label: "Orders" },  
     ],
 
     client: [
       { to: "/", icon: <BsGrid3X3GapFill />, label: "Products" },
-      { to: "/clientOrder", icon: <BsBoxFill />, label: "Available Inventory" },
+      { to: "/ClientOrder", icon: <BsBoxFill />, label: "Orders" },
     ]
   }
 

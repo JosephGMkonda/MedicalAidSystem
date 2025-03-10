@@ -6,6 +6,7 @@ import adminReducer from "./features/AdminSlice";
 import nearExpiryReducer from "./features/Expiry";
 import lowStockReducer from "./features/LowStockSlice";
 import inventoryManagerReducer from "./features/InventoryManagerSlice";
+import inventoryClientReducer from "./features/ClientProductSlice";
 
 export default configureStore({
   reducer: {
@@ -16,6 +17,8 @@ export default configureStore({
     nearExpiry: nearExpiryReducer,
     lowStock: lowStockReducer,
     inventory: inventoryManagerReducer,
+    inventoryProduct: inventoryClientReducer,
+
 
 
 
