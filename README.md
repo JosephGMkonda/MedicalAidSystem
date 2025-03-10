@@ -1,22 +1,37 @@
 📌 Overview
+
 The Medical Aid System is a comprehensive platform designed to 
 streamline medical logistics and aid management.
 It enables efficient inventory tracking, order processing,
 and approval workflows for medical supplies, 
 ensuring seamless operations within healthcare facilities.
 
+
 🔥 Features
+
+
 👨‍⚕️ User Roles: Admin, Inventory Manager, and Clients
+
+
 📦 Inventory Management: Track available medical supplies and update stock levels
+
 🛒 Order Processing: Clients can request multiple drugs, generating an invoice
+
 ✅ Approval Workflow: Admin reviews and approves orders before fulfillment
+
 📊 Dashboard Analytics: Insights into stock levels and order history
+
 🔐 Secure Authentication: User authentication and role-based access control
 
+
 🛠️ Tech Stack
+
 Frontend: React.js, Tailwind CSS
+
 Backend: Node.js, Express.js, Sequelize ORM
+
 Database: MySQL
+
 Authentication: JWT-based authentication
 
 
